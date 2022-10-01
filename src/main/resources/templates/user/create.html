@@ -32,7 +32,7 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form action="@{/user/create}" method="post" th:object="${user}">
+                                    <form th:action="@{/user/create}" method="post" th:object="${user}">
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6">
                                                 <div class="form-group">
@@ -98,9 +98,9 @@
                                             <div class="col-sm-6 col-md-6">
                                                 <div class="form-group">
                                                     <label>Choose a Role</label>
-                                                    <select name="role" th:field="*{role}" class="custom-select">
+                                                    <select  th:field="*{role}" class="custom-select">
                                                         <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="role : ${roles}" th:value="role" th:text="${role.description}"></option>
+                                                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.description}"></option>
                                                     </select>
                                                 </div>
                                             </div>
