@@ -1,5 +1,6 @@
 package com.foxborn.service.impl;
 
+import com.foxborn.dto.RoleDTO;
 import com.foxborn.dto.UserDTO;
 import com.foxborn.service.UserService;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,14 @@ public class UserServiceImpl extends AbstractMapService<UserDTO,String> implemen
     }
 
     @Override
+    public void update(UserDTO object) {
+        super.update(object.getUserName(), object);
+    }
+
+    @Override
     public UserDTO findById(String id) {
         return super.findById(id);
     }
+
+
 }

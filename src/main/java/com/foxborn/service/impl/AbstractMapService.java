@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This abstract class has implementation methods for Crud Services, and a map acting as DB
+ * class has generic methods for operations used by both services: RoleService and UserService
+ * @param <T>
+ * @param <ID>
+ */
 public abstract class AbstractMapService<T,ID> {
 
 // this is database
@@ -12,7 +18,7 @@ public abstract class AbstractMapService<T,ID> {
 
 
     T save(ID id,T object){
-        map.put(id,object);
+        map.put(id,object);    //  put - add new or update
         return object;
     }
 
@@ -26,6 +32,10 @@ public abstract class AbstractMapService<T,ID> {
 
     void deleteById(ID id){
         map.remove(id);
+    }
+
+    void update(ID id, T object){
+        map.put(id, object);
     }
 
 }
