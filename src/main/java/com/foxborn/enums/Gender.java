@@ -3,7 +3,7 @@ package com.foxborn.enums;
 public enum Gender {
 
 //    MALE,FEMALE
-    FEMALE("Female"),MALE("Male"),NA("WISH NOT TO DISCLOSE");
+    FEMALE("Female"),MALE("Male");
 
     private final String value;
     Gender(String value){

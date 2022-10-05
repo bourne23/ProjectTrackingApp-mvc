@@ -61,7 +61,6 @@ public class UserController {
     public String updateUser(UserDTO userDTO){
 
         userService.update(userDTO);
-
         return "redirect:/user/create";
         //return "/user/create"; // go  to this html and look for which model attributes to add
     }

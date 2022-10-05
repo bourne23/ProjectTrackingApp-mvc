@@ -1,22 +1,29 @@
 package com.foxborn.bootstrap;
 
+import com.foxborn.dto.ProjectDTO;
 import com.foxborn.dto.RoleDTO;
 import com.foxborn.dto.UserDTO;
 import com.foxborn.enums.Gender;
+import com.foxborn.enums.Status;
+import com.foxborn.service.ProjectService;
 import com.foxborn.service.RoleService;
 import com.foxborn.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class DataGenerator implements CommandLineRunner {
 //CommandLineRunner will initiate , load and execute the app
    RoleService roleService;
    UserService userService;
+   ProjectService projectService;
     //inject via constructor
-    public DataGenerator(RoleService roleService, UserService userService) {
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
         this.roleService = roleService;
         this.userService = userService;
+        this.projectService = projectService;
     }
 
     @Override
@@ -59,6 +66,15 @@ public class DataGenerator implements CommandLineRunner {
         userService.save(user7);
         userService.save(user8);
 
+
+        //4.
+        ProjectDTO project1 = new ProjectDTO("Spring MVC","PR001",user1, LocalDate.now(),LocalDate.now().plusDays(25),"Creating Controllers", Status.OPEN);
+        ProjectDTO project2 = new ProjectDTO("Spring ORM","PR002",user2, LocalDate.now(),LocalDate.now().plusDays(10),"Creating Database", Status.IN_PROGRESS);
+        ProjectDTO project3 = new ProjectDTO("Spring Container","PR003",user1, LocalDate.now(),LocalDate.now().plusDays(32),"Creating Container", Status.IN_PROGRESS);
+
+        projectService.save(project1);
+        projectService.save(project2);
+        projectService.save(project3);
 
 
 
