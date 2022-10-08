@@ -2,11 +2,13 @@ package com.foxborn.bootstrap;
 
 import com.foxborn.dto.ProjectDTO;
 import com.foxborn.dto.RoleDTO;
+import com.foxborn.dto.TaskDTO;
 import com.foxborn.dto.UserDTO;
 import com.foxborn.enums.Gender;
 import com.foxborn.enums.Status;
 import com.foxborn.service.ProjectService;
 import com.foxborn.service.RoleService;
+import com.foxborn.service.TaskService;
 import com.foxborn.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,11 +21,14 @@ public class DataGenerator implements CommandLineRunner {
    RoleService roleService;
    UserService userService;
    ProjectService projectService;
-    //inject via constructor
-    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
+
+    TaskService taskService;
+
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService, TaskService taskService) {
         this.roleService = roleService;
         this.userService = userService;
         this.projectService = projectService;
+        this.taskService = taskService;
     }
 
     @Override
@@ -79,6 +84,15 @@ public class DataGenerator implements CommandLineRunner {
 
 
 
+        TaskDTO task1 = new TaskDTO(project1, user8, "Controller", "Request Mapping", Status.IN_PROGRESS, LocalDate.now().minusDays(4));
+        TaskDTO task2 = new TaskDTO(project3, user3, "Configuration", "Database Connection", Status.COMPLETE, LocalDate.now().minusDays(12));
+        TaskDTO task3 = new TaskDTO(project3, user6, "Mapping", "One-To-Many", Status.COMPLETE, LocalDate.now().minusDays(8));
+        TaskDTO task4 = new TaskDTO(project2, user7, "Dependency Injection", "Autowired", Status.IN_PROGRESS, LocalDate.now().minusDays(20));
+
+        taskService.save(task1);
+        taskService.save(task2);
+        taskService.save(task3);
+        taskService.save(task4);
 
     }
 }

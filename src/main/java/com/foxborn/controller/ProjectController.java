@@ -1,6 +1,7 @@
 package com.foxborn.controller;
 
 import com.foxborn.dto.ProjectDTO;
+import com.foxborn.dto.UserDTO;
 import com.foxborn.service.ProjectService;
 import com.foxborn.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  *     <a th:href="@{/project/update/{id}(id=${project.getProjectCode()})}"><button type="button" class="btn btn-warning rounded-0">Update</button></a>
@@ -72,7 +75,18 @@ public class ProjectController {
     }
 
 
+@GetMapping("/manager/project-status")
+    public String getProjectsbyManager(Model model){
 
+    UserDTO manager = userService.findById("john@foxborn.com"); // this is the manager who is currently logged in the portal. Security will implement this.
+
+    // service returns a list of projects that belong to the current manager only
+    List<ProjectDTO> projects = projectService.getCountedListOfProjectDTO(manager);
+
+    model.addAttribute("projects",projects);
+
+        return "/manager/project-status";
+}
 
 
 }
