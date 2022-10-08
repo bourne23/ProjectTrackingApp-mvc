@@ -6,6 +6,7 @@ import com.foxborn.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends AbstractMapService<UserDTO,String> implements UserService {
@@ -36,4 +37,10 @@ public class UserServiceImpl extends AbstractMapService<UserDTO,String> implemen
     }
 
 
+    //iterate all users, and find managers only
+    // use stream and filter users by primary key (manager's id==2), and return a list
+    @Override
+    public List<UserDTO> findManagers() {
+        return super.findAll().stream().filter(user -> user.getRole().getId() == 2).collect(Collectors.toList());
+    }
 }
